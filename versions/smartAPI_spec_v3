@@ -1,5 +1,6 @@
 {
   "swagger": "2.0",
+  "openapi": "string",
   "info": {
     "version": "3.0.0.2",
     "title": "MyGene.info API",
@@ -15,23 +16,23 @@
     "x-maturity": "production",
     "x-implementationLanguage": "python"
   },
-  "externalDocs": [
+  "externalDocs": {
+    "description": "Find more info here",
+    "url": "https://example.com"
+  },
+  "x-externalResource": [
     {
-      "description": "Find more info here",
-      "url": "https://example.com",
-      "x-type": "website"
+      "x-url": "http://example.org/api/docs",
+      "x-type": "api documentation"
     },
     {
-      "x-type": "api documentation",
-      "url": "http://docs.mygene.info/en/latest/"
-    },
-    {
+      "x-url": "https://doi.org/10.1093/nar/gks1114",
       "x-type": "publication",
-      "url": "https://doi.org/10.1093/nar/gks1114"
+      "x-description": "BioGPS and MyGene.info: organizing online, gene-centric information"
     },
     {
-      "x-type": "social media",
-      "url": "http://twitter.com/mygeneinfo"
+      "x-url": "http://twitter.com/mygeneinfo",
+      "x-type": "social media"
     }
   ],
   "server": {
@@ -1057,178 +1058,178 @@
               "type": "object"
             },
             "description": "Successful response",
-            "responseDataType": [
+            "responseValueType": [
               {
-                "elementPath": "ec",
-                "datatype": "http://identifiers.org/ec-code/"
+                "path": "ec",
+                "valueType": "http://identifiers.org/ec-code/"
               },
               {
-                "elementPath": "ensembl.gene",
-                "datatype": "http://identifiers.org/ensembl/"
+                "path": "ensembl.gene",
+                "valueType": "http://identifiers.org/ensembl/"
               },
               {
-                "elementPath": "ensembl.translation.protein",
-                "datatype": "http://identifiers.org/ensembl/"
+                "path": "ensembl.translation.protein",
+                "valueType": "http://identifiers.org/ensembl/"
               },
               {
-                "elementPath": "ensembl.translation.rna",
-                "datatype": "http://identifiers.org/ensembl/"
+                "path": "ensembl.translation.rna",
+                "valueType": "http://identifiers.org/ensembl/"
               },
               {
-                "elementPath": "entrezgene",
-                "datatype": "http://identifiers.org/ncbigene/"
+                "path": "entrezgene",
+                "valueType": "http://identifiers.org/ncbigene/"
               },
               {
-                "elementPath": "generif.pubmed",
-                "datatype": "http://identifiers.org/pubmed/"
+                "path": "generif.pubmed",
+                "valueType": "http://identifiers.org/pubmed/"
               },
               {
-                "elementPath": "go.bp.evidence",
-                "datatype": "http://identifiers.org/eco/"
+                "path": "go.bp.evidence",
+                "valueType": "http://identifiers.org/eco/"
               },
               {
-                "elementPath": "go.bp.id",
-                "datatype": "http://identifiers.org/go/"
+                "path": "go.bp.id",
+                "valueType": "http://identifiers.org/go/"
               },
               {
-                "elementPath": "go.bp.pubmed",
-                "datatype": "http://identifiers.org/pubmed/"
+                "path": "go.bp.pubmed",
+                "valueType": "http://identifiers.org/pubmed/"
               },
               {
-                "elementPath": "go.bp.term",
-                "datatype": "http://identifiers.org/go/"
+                "path": "go.bp.term",
+                "valueType": "http://identifiers.org/go/"
               },
               {
-                "elementPath": "go.cc.evidence",
-                "datatype": "http://identifiers.org/eco/"
+                "path": "go.cc.evidence",
+                "valueType": "http://identifiers.org/eco/"
               },
               {
-                "elementPath": "go.cc.id",
-                "datatype": "http://identifiers.org/go/"
+                "path": "go.cc.id",
+                "valueType": "http://identifiers.org/go/"
               },
               {
-                "elementPath": "go.cc.pubmed",
-                "datatype": "http://identifiers.org/pubmed/"
+                "path": "go.cc.pubmed",
+                "valueType": "http://identifiers.org/pubmed/"
               },
               {
-                "elementPath": "go.cc.term",
-                "datatype": "http://identifiers.org/go/"
+                "path": "go.cc.term",
+                "valueType": "http://identifiers.org/go/"
               },
               {
-                "elementPath": "go.mf.evidence",
-                "datatype": "http://identifiers.org/eco/"
+                "path": "go.mf.evidence",
+                "valueType": "http://identifiers.org/eco/"
               },
               {
-                "elementPath": "go.mf.id",
-                "datatype": "http://identifiers.org/go/"
+                "path": "go.mf.id",
+                "valueType": "http://identifiers.org/go/"
               },
               {
-                "elementPath": "go.mf.pubmed",
-                "datatype": "http://identifiers.org/pubmed/"
+                "path": "go.mf.pubmed",
+                "valueType": "http://identifiers.org/pubmed/"
               },
               {
-                "elementPath": "go.mf.qualifier",
-                "datatype": "http://identifiers.org/go/"
+                "path": "go.mf.qualifier",
+                "valueType": "http://identifiers.org/go/"
               },
               {
-                "elementPath": "go.mf.term",
-                "datatype": "http://identifiers.org/go/"
+                "path": "go.mf.term",
+                "valueType": "http://identifiers.org/go/"
               },
               {
-                "elementPath": "hgnc",
-                "datatype": "http://identifiers.org/hgnc/"
+                "path": "hgnc",
+                "valueType": "http://identifiers.org/hgnc/"
               },
               {
-                "elementPath": "homologene.id",
-                "datatype": "http://identifiers.org/homologene/"
+                "path": "homologene.id",
+                "valueType": "http://identifiers.org/homologene/"
               },
               {
-                "elementPath": "interpro.desc",
-                "datatype": "http://identifiers.org/interpro/"
+                "path": "interpro.desc",
+                "valueType": "http://identifiers.org/interpro/"
               },
               {
-                "elementPath": "interpro.id",
-                "datatype": "http://identifiers.org/interpro/"
+                "path": "interpro.id",
+                "valueType": "http://identifiers.org/interpro/"
               },
               {
-                "elementPath": "interpro.short_desc",
-                "datatype": "http://identifiers.org/interpro/"
+                "path": "interpro.short_desc",
+                "valueType": "http://identifiers.org/interpro/"
               },
               {
-                "elementPath": "mim",
-                "datatype": "http://identifiers.org/omim/"
+                "path": "mim",
+                "valueType": "http://identifiers.org/omim/"
               },
               {
-                "elementPath": "pathway.biocarta.id",
-                "datatype": "http://identifiers.org/biocarta.pathway/"
+                "path": "pathway.biocarta.id",
+                "valueType": "http://identifiers.org/biocarta.pathway/"
               },
               {
-                "elementPath": "pathway.biocarta.name",
-                "datatype": "http://identifiers.org/biocarta.pathway/"
+                "path": "pathway.biocarta.name",
+                "valueType": "http://identifiers.org/biocarta.pathway/"
               },
               {
-                "elementPath": "pathway.kegg.id",
-                "datatype": "http://identifiers.org/kegg.pathway/"
+                "path": "pathway.kegg.id",
+                "valueType": "http://identifiers.org/kegg.pathway/"
               },
               {
-                "elementPath": "pathway.kegg.name",
-                "datatype": "http://identifiers.org/kegg.pathway/"
+                "path": "pathway.kegg.name",
+                "valueType": "http://identifiers.org/kegg.pathway/"
               },
               {
-                "elementPath": "pathway.pid.id",
-                "datatype": "http://identifiers.org/pid.pathway/"
+                "path": "pathway.pid.id",
+                "valueType": "http://identifiers.org/pid.pathway/"
               },
               {
-                "elementPath": "pathway.pid.name",
-                "datatype": "http://identifiers.org/pid.pathway/"
+                "path": "pathway.pid.name",
+                "valueType": "http://identifiers.org/pid.pathway/"
               },
               {
-                "elementPath": "pathway.reactome.id",
-                "datatype": "http://identifiers.org/reactome/"
+                "path": "pathway.reactome.id",
+                "valueType": "http://identifiers.org/reactome/"
               },
               {
-                "elementPath": "pathway.reactome.name",
-                "datatype": "http://identifiers.org/reactome/"
+                "path": "pathway.reactome.name",
+                "valueType": "http://identifiers.org/reactome/"
               },
               {
-                "elementPath": "pathway.wikipathways.id",
-                "datatype": "http://identifiers.org/wikipathways/"
+                "path": "pathway.wikipathways.id",
+                "valueType": "http://identifiers.org/wikipathways/"
               },
               {
-                "elementPath": "pathway.wikipathways.name",
-                "datatype": "http://identifiers.org/wikipathways/"
+                "path": "pathway.wikipathways.name",
+                "valueType": "http://identifiers.org/wikipathways/"
               },
               {
-                "elementPath": "pfam",
-                "datatype": "http://identifiers.org/pfam/"
+                "path": "pfam",
+                "valueType": "http://identifiers.org/pfam/"
               },
               {
-                "elementPath": "pharmgkb",
-                "datatype": "http://identifiers.org/pharmgkb.pathways/"
+                "path": "pharmgkb",
+                "valueType": "http://identifiers.org/pharmgkb.pathways/"
               },
               {
-                "elementPath": "prosite",
-                "datatype": "http://identifiers.org/prosite/"
+                "path": "prosite",
+                "valueType": "http://identifiers.org/prosite/"
               },
               {
-                "elementPath": "refseq.translation.protein",
-                "datatype": "http://identifiers.org/refseq/"
+                "path": "refseq.translation.protein",
+                "valueType": "http://identifiers.org/refseq/"
               },
               {
-                "elementPath": "refseq.translation.rna",
-                "datatype": "http://identifiers.org/refseq/"
+                "path": "refseq.translation.rna",
+                "valueType": "http://identifiers.org/refseq/"
               },
               {
-                "elementPath": "taxid",
-                "datatype": "http://identifiers.org/taxonomy/"
+                "path": "taxid",
+                "valueType": "http://identifiers.org/taxonomy/"
               },
               {
-                "elementPath": "uniprot.swiss-prot",
-                "datatype": "http://identifiers.org/uniprot/"
+                "path": "uniprot.swiss-prot",
+                "valueType": "http://identifiers.org/uniprot/"
               },
               {
-                "elementPath": "wikipedia.url_stub",
-                "datatype": "http://identifiers.org/wikipedia.en/"
+                "path": "wikipedia.url_stub",
+                "valueType": "http://identifiers.org/wikipedia.en/"
               }
             ]
           }
