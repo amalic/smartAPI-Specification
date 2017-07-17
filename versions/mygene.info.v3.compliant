@@ -2,14 +2,14 @@
     "swagger": "2.0",
     "openapi": "string",
     "info": {
-        "version": "3.0.0.2",
+        "version": "3.0.2",
         "title": "MyGene.info API",
-        "description": "Documentation of the MyGene.info Gene Query web services. Learn more about [MyGene.info](http://mygene.info/)",
-        "termsOfService": "http://example.com/terms/",
+        "description": "MyGene.info provides simple-to-use REST web services to query/retrieve gene annotation data. It’s designed with simplicity and performance emphasized. A typical use case is to use it to power a web application which requires querying genes and obtaining common gene annotations. Learn more about [MyGene.info](http://mygene.info/)",
+        "termsOfService": "http://mygene.info/terms/",
         "contact": {
             "name": "Chunlei Wu",
-            "x-role": "responsibleDeveloper",
             "email": "help@mygene.info",
+            "x-role": "responsible developer",
             "x-id": "http://orcid.org/0000-0002-2629-6124"
         },
         "x-accessRestriction": "none",
@@ -17,12 +17,12 @@
         "x-implementationLanguage": "python"
     },
     "externalDocs": {
-        "description": "Find more info here",
-        "url": "https://example.com"
+        "description": "Website",
+        "url": "https://mygene.info"
     },
     "x-externalResource": [
         {
-            "x-url": "http://example.org/api/docs",
+            "x-url": "http://docs.mygene.info/en/latest/s",
             "x-type": "api documentation"
         },
         {
@@ -37,8 +37,8 @@
     ],
     "servers": [
         {
-            "url": "https://development.gigantic-server.com/v",
-            "description": "Development server",
+            "url": "http:/mygene.info",
+            "description": "Production server",
             "x-location": "California, USA",
             "variables": {
                 "basePath": {
