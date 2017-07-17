@@ -1,1315 +1,261 @@
 {
-    "swagger": "2.0",
-    "openapi": "string",
-    "info": {
-        "version": "3.0.2",
-        "title": "MyGene.info API",
-        "description": "MyGene.info provides simple-to-use REST web services to query/retrieve gene annotation data. It’s designed with simplicity and performance emphasized. A typical use case is to use it to power a web application which requires querying genes and obtaining common gene annotations. Learn more about [MyGene.info](http://mygene.info/)",
-        "termsOfService": "http://mygene.info/terms/",
-        "contact": {
-            "name": "Chunlei Wu",
-            "email": "help@mygene.info",
-            "x-role": "responsible developer",
-            "x-id": "http://orcid.org/0000-0002-2629-6124"
-        },
-        "x-accessRestriction": "none",
-        "x-maturity": "production",
-        "x-implementationLanguage": "python"
+  "openapi": "string",
+  "info": {
+    "version": "3.0.0.2",
+    "title": "MyGene.info API",
+    "description": "Documentation of the MyGene.info Gene Query web services. Learn more about [MyGene.info](http://mygene.info/)",
+    "termsOfService": "http://example.com/terms/",
+    "contact": {
+      "name": "Chunlei Wu",
+      "x-role": "responsibleDeveloper",
+      "email": "help@mygene.info",
+      "x-id": "http://orcid.org/0000-0002-2629-6124"
     },
-    "externalDocs": {
-        "description": "Website",
-        "url": "https://mygene.info"
+    "x-accessRestriction": "none",
+    "x-maturity": "production",
+    "x-implementationLanguage": "python"
+  },
+  "externalDocs": {
+    "description": "Find more info here",
+    "url": "https://example.com"
+  },
+  "x-externalResource": [
+    {
+      "x-url": "http://example.org/api/docs",
+      "x-type": "api documentation"
     },
-    "x-externalResource": [
-        {
-            "x-url": "http://docs.mygene.info/en/latest/s",
-            "x-type": "api documentation"
-        },
-        {
-            "x-url": "https://doi.org/10.1093/nar/gks1114",
-            "x-type": "publication",
-            "x-description": "BioGPS and MyGene.info: organizing online, gene-centric information"
-        },
-        {
-            "x-url": "http://twitter.com/mygeneinfo",
-            "x-type": "social media"
-        }
-    ],
-    "servers": [
-        {
-            "url": "http:/mygene.info",
-            "description": "Production server",
-            "x-location": "California, USA",
-            "variables": {
-                "basePath": {
-                    "default": "/v3"
-                }
-            }
-        }
-    ],
-    "tags": [
-        {
-            "name": "query",
-            "description": "Query for gene information"
-        },
-        {
-            "name": "gene",
-            "description": "Gene annotation information"
-        },
-        {
-            "name": "metadata",
-            "description": "Metadata about the data available from MyGene.info."
-        },
-        {
-            "name": "http://purl.bioontology.org/ontology/MESH/D005796",
-            "description": "Genes"
-        }
-    ],
-    "paths": {
-        "/query": {
-            "get": {
-                "tags": [
-                    "query"
-                ],
-                "summary": "Makes gene query and returns matching gene list.",
-                "x-accessRestriction": "free",
-                "parameters": [
-                    {
-                        "name": "q",
-                        "in": "query",
-                        "description": "Query string. Examples \"CDK2\", \"NM_052827\", \"204639_at\". The detailed query syntax can be found at http://docs.mygene.info/en/latest/doc/query_service.html",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "x-parameterType": "InputParameter",
-                        "x-valueType": [
-                            "http://identifiers.org/hgnc.symbol",
-                            "http://identifiers.org/refseq",
-                            "http://identifiers.org/unigene",
-                            "http://identifiers.org/uniprot",
-                            "http://identifiers.org/pdb",
-                            "http://identifiers.org/prosite",
-                            "http://identifiers.org/pfam",
-                            "http://identifiers.org/interpro",
-                            "http://identifiers.org/hgnc",
-                            "http://identifiers.org/mgi",
-                            "http://identifiers.org/rgd",
-                            "http://identifiers.org/flybase",
-                            "http://identifiers.org/wormbase",
-                            "http://identifiers.org/zfin",
-                            "http://identifiers.org/tair.gene",
-                            "http://identifiers.org/xenbase",
-                            "http://identifiers.org/mirbase"
-                        ],
-                        "x-defaultValue": "CDK2",
-                        "x-exampleValue": "CDK2"
-                    },
-                    {
-                        "name": "fields",
-                        "in": "query",
-                        "description": "A comma-separated field to limit the fields returned from the matching gene hits. The supported field names can be found from any gene object (e.g. http://mygene.info/v2/gene/1017). Note that it supports dot notation as well, e.g., you can pass \"refseq.rna\". If \"fields=all\", all available fields will be returned. Default \"symbol,name,taxid,entrezgene,ensemblgene\".",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "species",
-                        "in": "query",
-                        "description": "can be used to limit the gene hits from given species. You can use \"common names\" for nine common species (human, mouse, rat, fruitfly, nematode, zebrafish, thale-cress, frog and pig). All other species, you can provide their taxonomy ids. Multiple species can be passed using comma as a separator. Passing “all” will query against all available species. Default human,mouse,rat.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "size",
-                        "in": "query",
-                        "description": "the maximum number of matching gene hits to return (with a cap of 1000 at the moment). Default 10.",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "from",
-                        "in": "query",
-                        "description": "the number of matching gene hits to skip, starting from 0. Combining with \"size\" parameter, this can be useful for paging. Default 0.",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "comma-separated fields to sort on. Prefix with \"-\" for descending order, otherwise in ascending order. Sort by matching scores in decending order.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "facets",
-                        "in": "query",
-                        "description": "a single field or comma-separated fields to return facets, for example, “facets=taxid”, “facets=taxid,type_of_gene”.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "species_facet_filter",
-                        "in": "query",
-                        "description": "relevant when faceting on species (i.e., “facets=taxid” are passed). It’s used to pass species filter without changing the scope of faceting, so that the returned facet counts won’t change. Either species name or taxonomy id can be used, just like “species” parameter above.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "entrezonly",
-                        "in": "query",
-                        "description": "when passed as “true” or “1”, the query returns only the hits with valid Entrez gene ids. Default: false",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "ensemblonly",
-                        "in": "query",
-                        "description": "when passed as “true” or “1”, the query returns only the hits with valid Ensembl gene ids. Default: false.",
-                        "required": false,
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "callback",
-                        "in": "query",
-                        "description": "you can pass a \"callback\" parameter to make a JSONP call.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "dotfield",
-                        "in": "query",
-                        "description": "control the format of the returned fields when passed \"fields\" parameter contains dot notation, e.g. \"fields=refseq.rna\". If \"true\" or \"1\", the returned data object contains a single \"refseq.rna\" field, otherwise (\"false\" or \"0\"), a single \"refseq\" field with a sub-field of \"rna\". Default: true",
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "filter",
-                        "in": "query",
-                        "description": "alias for \"fields\" parameter.",
-                        "type": "string"
-                    },
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "description": "alias for \"size\" parameter.",
-                        "type": "integer"
-                    },
-                    {
-                        "name": "skip",
-                        "in": "query",
-                        "description": "alias for \"from\" parameter.",
-                        "type": "integer"
-                    },
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "If you are regular users of our services, we encourage you to provide us an email, so that we can better track the usage or follow up with you.",
-                        "type": "string"
-                    }
-                ],
-                "description": "Make gene query and return matching gene list. Support JSONP and CORS as well.",
-                "operationId": "queryGene",
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "hits": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "name": {
-                                                "type": "string"
-                                            },
-                                            "entrezgene": {
-                                                "type": "integer"
-                                            },
-                                            "taxid": {
-                                                "type": "integer"
-                                            },
-                                            "symbol": {
-                                                "type": "string"
-                                            },
-                                            "_id": {
-                                                "type": "integer"
-                                            }
-                                        }
-                                    }
-                                },
-                                "max_score": {
-                                    "type": "integer"
-                                },
-                                "took": {
-                                    "type": "integer"
-                                },
-                                "total": {
-                                    "type": "integer"
-                                }
-                            }
-                        },
-                        "description": "Successful response"
-                    }
-                }
-            }
-        },
-        "/metadata": {
-            "get": {
-                "tags": [
-                    "metadata"
-                ],
-                "parameters": [
-                    {
-                        "name": "callback",
-                        "in": "query",
-                        "description": "you can pass a \"callback\" parameter to make a JSONP call.",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "description": "Get metadata about the data available from MyGene.info\n",
-                "operationId": "getMetadata",
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "properties": {
-                                "app_revision": {
-                                    "type": "string"
-                                },
-                                "genome_assembly": {
-                                    "properties": {
-                                        "fruitfly": {
-                                            "type": "string"
-                                        },
-                                        "zebrafish": {
-                                            "type": "string"
-                                        },
-                                        "nematode": {
-                                            "type": "string"
-                                        },
-                                        "human": {
-                                            "type": "string"
-                                        },
-                                        "rat": {
-                                            "type": "string"
-                                        },
-                                        "pig": {
-                                            "type": "string"
-                                        },
-                                        "mouse": {
-                                            "type": "string"
-                                        },
-                                        "frog": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "source": {
-                                    "type": "string"
-                                },
-                                "taxonomy": {
-                                    "properties": {
-                                        "fruitfly": {
-                                            "type": "integer"
-                                        },
-                                        "thale-cress\"": {
-                                            "type": "integer"
-                                        },
-                                        "zebrafish": {
-                                            "type": "integer"
-                                        },
-                                        "nematode": {
-                                            "type": "integer"
-                                        },
-                                        "human": {
-                                            "type": "integer"
-                                        },
-                                        "rat": {
-                                            "type": "integer"
-                                        },
-                                        "pig": {
-                                            "type": "integer"
-                                        },
-                                        "mouse": {
-                                            "type": "integer"
-                                        },
-                                        "frog": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "timestamp": {
-                                    "type": "string"
-                                },
-                                "src_version": {
-                                    "properties": {
-                                        "netaffy": {
-                                            "type": "string"
-                                        },
-                                        "entrez": {
-                                            "type": "integer"
-                                        },
-                                        "pharmgkb": {
-                                            "type": "integer"
-                                        },
-                                        "ucsc": {
-                                            "type": "integer"
-                                        },
-                                        "cpdb": {
-                                            "type": "integer"
-                                        },
-                                        "refseq": {
-                                            "type": "integer"
-                                        },
-                                        "ensembl": {
-                                            "type": "integer"
-                                        },
-                                        "uniprot": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "stats": {
-                                    "properties": {
-                                        "total_ensembl_genes_mapped_to_entrez": {
-                                            "type": "integer"
-                                        },
-                                        "total_entrez_genes": {
-                                            "type": "integer"
-                                        },
-                                        "total_ensembl_only_genes": {
-                                            "type": "integer"
-                                        },
-                                        "total_ensembl_genes": {
-                                            "type": "integer"
-                                        },
-                                        "total_genes": {
-                                            "type": "integer"
-                                        },
-                                        "total_species": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "available_fields": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "description": "Successful response"
-                    }
-                }
-            }
-        },
-        "/gene/{geneid}": {
-            "get": {
-                "tags": [
-                    "gene"
-                ],
-                "parameters": [
-                    {
-                        "name": "geneid",
-                        "in": "path",
-                        "description": "Entrez or Ensembl gene id, e.g., 1017, ENSG00000170248. A retired Entrez Gene id works too if it is replaced by a new one, e.g., 245794",
-                        "required": true,
-                        "type": "string",
-                        "x-parameterType": "InputParameter",
-                        "x-valueType": [
-                            "http://identifiers.org/ncbigene",
-                            "http://identifiers.org/ensembl"
-                        ],
-                        "x-defaultValue": null,
-                        "x-exampleValue": "1017"
-                    },
-                    {
-                        "name": "fields",
-                        "in": "query",
-                        "description": "a comma-separated fields to limit the fields returned from the matching gene hits. The supported field names can be found from any gene object (e.g. http://mygene.info/v2/gene/1017). Note that it supports dot notation as well, e.g., you can pass \"refseq.rna\". If \"fields=all\", all available fields will be returned. Default \"symbol,name,taxid,entrezgene,ensemblgene\".",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "callback",
-                        "in": "query",
-                        "description": "you can pass a \"callback\" parameter to make a JSONP call.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "filter",
-                        "in": "query",
-                        "description": "alias for \"fields\" parameter.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "dotfield",
-                        "in": "query",
-                        "description": "control the format of the returned fields when passed \"fields\" parameter contains dot notation, e.g. \"fields=refseq.rna\". If \"true\" or \"1\", the returned data object contains a single \"refseq.rna\" field, otherwise (\"false\" or \"0\"), a single \"refseq\" field with a sub-field of \"rna\". Default true.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "If you are regular users of our services, we encourage you to provide us an email, so that we can better track the usage or follow up with you.",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "description": "Retrieve gene annotation based on Entrez or Ensembl gene id, support\nJSONP and CORS as well.\n",
-                "operationId": "getAnnotation",
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "properties": {
-                                "reporter": {
-                                    "properties": {
-                                        "HTA-2_0": {
-                                            "type": "string"
-                                        },
-                                        "HG-U133_Plus_2": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "HuEx-1_0": {
-                                            "type": "integer"
-                                        },
-                                        "HuGene-1_1": {
-                                            "type": "integer"
-                                        },
-                                        "HuGene-2_1": {
-                                            "type": "integer"
-                                        },
-                                        "HG-U95Av2": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "prosite": {
-                                    "type": "string"
-                                },
-                                "summary": {
-                                    "type": "string"
-                                },
-                                "exons": {
-                                    "type": "object"
-                                },
-                                "symbol": {
-                                    "type": "string"
-                                },
-                                "genomic_pos": {
-                                    "properties": {
-                                        "chr": {
-                                            "type": "integer"
-                                        },
-                                        "strand": {
-                                            "type": "integer"
-                                        },
-                                        "end": {
-                                            "type": "integer"
-                                        },
-                                        "start": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "homologene": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer"
-                                        },
-                                        "genes": {
-                                            "items": {
-                                                "type": "integer"
-                                            },
-                                            "type": "array"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "taxid": {
-                                    "type": "integer"
-                                },
-                                "pathway": {
-                                    "properties": {
-                                        "kegg": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "name": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "wikipathways": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "name": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "pid": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "name": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "netpath": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "name": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "reactome": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "name": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "biocarta": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "name": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "Vega": {
-                                    "type": "string"
-                                },
-                                "entrezgene": {
-                                    "type": "string"
-                                },
-                                "pfam": {
-                                    "type": "string"
-                                },
-                                "ec": {
-                                    "type": "string"
-                                },
-                                "refseq": {
-                                    "properties": {
-                                        "genomic": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "rna": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "protein": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "wikipedia": {
-                                    "properties": {
-                                        "url_stub": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "ensembl": {
-                                    "properties": {
-                                        "transcript": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "gene": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "accession": {
-                                    "properties": {
-                                        "genomic": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "rna": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "protein": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "MIM": {
-                                    "type": "integer"
-                                },
-                                "HPRD": {
-                                    "type": "integer"
-                                },
-                                "unigene": {
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array"
-                                },
-                                "pharmgkb": {
-                                    "type": "string"
-                                },
-                                "genomic_pos_hg19": {
-                                    "properties": {
-                                        "chr": {
-                                            "type": "integer"
-                                        },
-                                        "strand": {
-                                            "type": "integer"
-                                        },
-                                        "end": {
-                                            "type": "integer"
-                                        },
-                                        "start": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "HGNC": {
-                                    "type": "integer"
-                                },
-                                "type_of_gene": {
-                                    "type": "string"
-                                },
-                                "pir": {
-                                    "type": "string"
-                                },
-                                "_id": {
-                                    "type": "string"
-                                },
-                                "pdb": {
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array"
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "map_location": {
-                                    "type": "string"
-                                },
-                                "go": {
-                                    "properties": {
-                                        "BP": {
-                                            "items": {
-                                                "properties": {
-                                                    "evidence": {
-                                                        "type": "string"
-                                                    },
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "term": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "CC": {
-                                            "items": {
-                                                "properties": {
-                                                    "evidence": {
-                                                        "type": "string"
-                                                    },
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "term": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "MF": {
-                                            "items": {
-                                                "properties": {
-                                                    "evidence": {
-                                                        "type": "string"
-                                                    },
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "term": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "reagent": {
-                                    "properties": {
-                                        "GNF_hs_LentiORF-HA-MYC": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                },
-                                                "relationship": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "GNF_hs-Origene": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "relationonship": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "GNF_Qia_hs-genome_v1_siRNA": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "relationonship": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "GNF_hs_LentiORF-Jred": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                },
-                                                "relationonship": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "GNF_hs-druggable_siRNA": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "relationonship": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "GNF_hs-ORFeome1_1_reads": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                },
-                                                "relationonship": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "Invitrogen_IVTHSSIPKv2": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "relationonship": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "GNF_hs-druggable_lenti-shRNA": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "relationonship": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "GNF_mm+hs-MGC": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                },
-                                                "relationonship": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "GNF_hs-pkinase_IDT-siRNA": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "relationonship": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "GNF_hs-druggable_plasmid-shRNA": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "relationonship": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "NOVART_hs-genome_siRNA": {
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "string"
-                                                    },
-                                                    "relationonship": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            },
-                                            "type": "array"
-                                        },
-                                        "NIBRI_hs-Secretome_pDEST": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                },
-                                                "relationship": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                },
-                                "interpro": {
-                                    "items": {
-                                        "properties": {
-                                            "id": {
-                                                "type": "string"
-                                            },
-                                            "description": {
-                                                "type": "string"
-                                            },
-                                            "short_desc": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "type": "array"
-                                },
-                                "ipi": {
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array"
-                                },
-                                "alias": {
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "type": "array"
-                                },
-                                "generif": {
-                                    "items": {
-                                        "properties": {
-                                            "pubmed": {
-                                                "type": "string"
-                                            },
-                                            "text": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "type": "object"
-                                    },
-                                    "type": "array"
-                                },
-                                "uniprot": {
-                                    "properties": {
-                                        "Swiss-Prot": {
-                                            "type": "string"
-                                        },
-                                        "TrEMBL": {
-                                            "items": {
-                                                "type": "string"
-                                            },
-                                            "type": "array"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "type": "object"
-                        },
-                        "description": "Successful response",
-                        "responseValueType": [
-                            {
-                                "path": "ec",
-                                "valueType": "http://identifiers.org/ec-code/"
-                            },
-                            {
-                                "path": "ensembl.gene",
-                                "valueType": "http://identifiers.org/ensembl/"
-                            },
-                            {
-                                "path": "ensembl.translation.protein",
-                                "valueType": "http://identifiers.org/ensembl/"
-                            },
-                            {
-                                "path": "ensembl.translation.rna",
-                                "valueType": "http://identifiers.org/ensembl/"
-                            },
-                            {
-                                "path": "entrezgene",
-                                "valueType": "http://identifiers.org/ncbigene/"
-                            },
-                            {
-                                "path": "generif.pubmed",
-                                "valueType": "http://identifiers.org/pubmed/"
-                            },
-                            {
-                                "path": "go.bp.evidence",
-                                "valueType": "http://identifiers.org/eco/"
-                            },
-                            {
-                                "path": "go.bp.id",
-                                "valueType": "http://identifiers.org/go/"
-                            },
-                            {
-                                "path": "go.bp.pubmed",
-                                "valueType": "http://identifiers.org/pubmed/"
-                            },
-                            {
-                                "path": "go.bp.term",
-                                "valueType": "http://identifiers.org/go/"
-                            },
-                            {
-                                "path": "go.cc.evidence",
-                                "valueType": "http://identifiers.org/eco/"
-                            },
-                            {
-                                "path": "go.cc.id",
-                                "valueType": "http://identifiers.org/go/"
-                            },
-                            {
-                                "path": "go.cc.pubmed",
-                                "valueType": "http://identifiers.org/pubmed/"
-                            },
-                            {
-                                "path": "go.cc.term",
-                                "valueType": "http://identifiers.org/go/"
-                            },
-                            {
-                                "path": "go.mf.evidence",
-                                "valueType": "http://identifiers.org/eco/"
-                            },
-                            {
-                                "path": "go.mf.id",
-                                "valueType": "http://identifiers.org/go/"
-                            },
-                            {
-                                "path": "go.mf.pubmed",
-                                "valueType": "http://identifiers.org/pubmed/"
-                            },
-                            {
-                                "path": "go.mf.qualifier",
-                                "valueType": "http://identifiers.org/go/"
-                            },
-                            {
-                                "path": "go.mf.term",
-                                "valueType": "http://identifiers.org/go/"
-                            },
-                            {
-                                "path": "hgnc",
-                                "valueType": "http://identifiers.org/hgnc/"
-                            },
-                            {
-                                "path": "homologene.id",
-                                "valueType": "http://identifiers.org/homologene/"
-                            },
-                            {
-                                "path": "interpro.desc",
-                                "valueType": "http://identifiers.org/interpro/"
-                            },
-                            {
-                                "path": "interpro.id",
-                                "valueType": "http://identifiers.org/interpro/"
-                            },
-                            {
-                                "path": "interpro.short_desc",
-                                "valueType": "http://identifiers.org/interpro/"
-                            },
-                            {
-                                "path": "mim",
-                                "valueType": "http://identifiers.org/omim/"
-                            },
-                            {
-                                "path": "pathway.biocarta.id",
-                                "valueType": "http://identifiers.org/biocarta.pathway/"
-                            },
-                            {
-                                "path": "pathway.biocarta.name",
-                                "valueType": "http://identifiers.org/biocarta.pathway/"
-                            },
-                            {
-                                "path": "pathway.kegg.id",
-                                "valueType": "http://identifiers.org/kegg.pathway/"
-                            },
-                            {
-                                "path": "pathway.kegg.name",
-                                "valueType": "http://identifiers.org/kegg.pathway/"
-                            },
-                            {
-                                "path": "pathway.pid.id",
-                                "valueType": "http://identifiers.org/pid.pathway/"
-                            },
-                            {
-                                "path": "pathway.pid.name",
-                                "valueType": "http://identifiers.org/pid.pathway/"
-                            },
-                            {
-                                "path": "pathway.reactome.id",
-                                "valueType": "http://identifiers.org/reactome/"
-                            },
-                            {
-                                "path": "pathway.reactome.name",
-                                "valueType": "http://identifiers.org/reactome/"
-                            },
-                            {
-                                "path": "pathway.wikipathways.id",
-                                "valueType": "http://identifiers.org/wikipathways/"
-                            },
-                            {
-                                "path": "pathway.wikipathways.name",
-                                "valueType": "http://identifiers.org/wikipathways/"
-                            },
-                            {
-                                "path": "pfam",
-                                "valueType": "http://identifiers.org/pfam/"
-                            },
-                            {
-                                "path": "pharmgkb",
-                                "valueType": "http://identifiers.org/pharmgkb.pathways/"
-                            },
-                            {
-                                "path": "prosite",
-                                "valueType": "http://identifiers.org/prosite/"
-                            },
-                            {
-                                "path": "refseq.translation.protein",
-                                "valueType": "http://identifiers.org/refseq/"
-                            },
-                            {
-                                "path": "refseq.translation.rna",
-                                "valueType": "http://identifiers.org/refseq/"
-                            },
-                            {
-                                "path": "taxid",
-                                "valueType": "http://identifiers.org/taxonomy/"
-                            },
-                            {
-                                "path": "uniprot.swiss-prot",
-                                "valueType": "http://identifiers.org/uniprot/"
-                            },
-                            {
-                                "path": "wikipedia.url_stub",
-                                "valueType": "http://identifiers.org/wikipedia.en/"
-                            }
-                        ]
-                    }
-                }
-            }
-        },
-        "/gene": {
-            "post": {
-                "tags": [
-                    "gene"
-                ],
-                "parameters": [
-                    {
-                        "name": "ids",
-                        "in": "query",
-                        "description": "multiple geneids seperated by comma, e.g., \"ids=1017,1018\" or \"ids=695,ENSG00000123374\". Note that currently we only take the input ids up to 1000 maximum, the rest will be omitted.",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "fields",
-                        "in": "query",
-                        "description": "a comma-separated fields to limit the fields returned from the matching gene hits. The supported field names can be found from any gene object (e.g. http://mygene.info/v2/gene/1017). Note that it supports dot notation as well, e.g., you can pass \"refseq.rna\". If \"fields=all\", all available fields will be returned. Default \"symbol,name,taxid,entrezgene,ensemblgene\".",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "species",
-                        "in": "query",
-                        "description": "Optional, can be used to limit the gene hits from given species. You can use \"common names\" for nine common species (human, mouse, rat, fruitfly, nematode, zebrafish, thale-cress, frog and pig). All other species, you can provide their taxonomy ids. Multiple species can be passed using comma as a separator. Default all.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "dotfield",
-                        "in": "query",
-                        "description": "control the format of the returned fields when passed \"fields\" parameter contains dot notation, e.g. \"fields=refseq.rna\". If \"true\" or \"1\", the returned data object contains a single \"refseq.rna\" field, otherwise (\"false\" or \"0\"), a single \"refseq\" field with a sub-field of \"rna\". Default true.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "If you are regular users of our services, we encourage you to provide us an email, so that we can better track the usage or follow up with you.",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "description": "Make gene queries in batch for a list of Entrez or Ensembl gene ids.\n",
-                "operationId": "getGenes",
-                "responses": {
-                    "200": {
-                        "schema": {
-                            "items": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "entrezgene": {
-                                        "type": "integer"
-                                    },
-                                    "symbol": {
-                                        "type": "string"
-                                    },
-                                    "taxid": {
-                                        "type": "integer"
-                                    },
-                                    "query": {
-                                        "type": "string"
-                                    },
-                                    "_id": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
-                            "type": "array"
-                        },
-                        "description": "Successful response"
-                    }
-                }
-            }
-        }
+    {
+      "x-url": "https://doi.org/10.1093/nar/gks1114",
+      "x-type": "publication",
+      "x-description": "BioGPS and MyGene.info: organizing online, gene-centric information"
+    },
+    {
+      "x-url": "http://twitter.com/mygeneinfo",
+      "x-type": "social media"
     }
+  ],
+  "servers": [{
+    "url": "http://mygene.info",
+    "description": "Development server",
+    "x-location": "California, USA"
+  }],
+  "tags": [
+    {
+      "name": "http://purl.bioontology.org/ontology/MESH/D005796",
+      "description": "Genes"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "skipParam": {
+        "name": "skip",
+        "in": "query",
+        "description": "number of items to skip",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "limitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "max records to return",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "Entity not found."
+      },
+      "IllegalInput": {
+        "description": "Illegal input for operation."
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      },
+      "petstore_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "http://example.org/api/oauth/dialog",
+            "scopes": {
+              "write:pets": "modify genes in your account",
+              "read:pets": "read your genes"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/query": {
+      "get": {
+        "description": "Makes gene query and returns matching gene list.",
+        "x-accessRestriction": "free",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Query string. Examples \"CDK2\", \"NM_052827\", \"204639_at\". The detailed query syntax can be found at http://docs.mygene.info/en/latest/doc/query_service.html",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "x-parameterType": "InputParameter",
+            "x-valueType": [
+              "http://identifiers.org/hgnc.symbol",
+              "http://identifiers.org/refseq",
+              "http://identifiers.org/unigene",
+              "http://identifiers.org/uniprot",
+              "http://identifiers.org/pdb"
+            ]
+          }
+        ],
+        "operationId": "queryGene",
+        "responses": {
+        "200": {
+          "description": "Successful response.",
+          "content": {
+            "application/json": {
+              "x-responseProfile": "http://www.w3.org/ns/anno.jsonld",
+              "x-responseValueType": [
+                {
+                  "path": "a.id",
+                  "valueType": "http://example.org/a.id"
+                },
+                {
+                  "path": "a.b.c.id",
+                  "valueType": "http://example.org/c.id"
+                }
+              ]
+            }
+          }
+        }
+      }
+     }
+    },
+    "/gene/{geneid}": {
+      "get": {
+        "tags": [
+          "gene"
+        ],
+        "parameters": [
+          {
+            "name": "geneid",
+            "in": "path",
+            "description": "Entrez or Ensembl gene id, e.g., 1017, ENSG00000170248. A retired Entrez Gene id works too if it is replaced by a new one, e.g., 245794",
+            "required": true,
+            "type": "string",
+            "x-parameterType": "InputParameter",
+            "x-valueType": [
+              "http://identifiers.org/ncbigene",
+              "http://identifiers.org/ensembl"
+            ],
+            "x-defaultValue": null,
+            "x-exampleValue": "1017"
+          }
+        ],
+        "operationId": "getAnnotation",
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "reporter": {
+                  "properties": {
+                    "HTA-2_0": {
+                      "type": "string"
+                    },
+                    "HG-U133_Plus_2": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "HuEx-1_0": {
+                      "type": "integer"
+                    },
+                    "HuGene-1_1": {
+                      "type": "integer"
+                    },
+                    "HuGene-2_1": {
+                      "type": "integer"
+                    },
+                    "HG-U95Av2": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response",
+            "x-responseValueType": [
+              {
+                "path": "ec",
+                "valueType": "http://identifiers.org/ec-code/"
+              },
+              {
+                "path": "ensembl.gene",
+                "valueType": "http://identifiers.org/ensembl/"
+              },
+              {
+                "path": "ensembl.translation.protein",
+                "valueType": "http://identifiers.org/ensembl/"
+              },
+              {
+                "path": "ensembl.translation.rna",
+                "valueType": "http://identifiers.org/ensembl/"
+              },
+              {
+                "path": "entrezgene",
+                "valueType": "http://identifiers.org/ncbigene/"
+              },
+              {
+                "path": "generif.pubmed",
+                "valueType": "http://identifiers.org/pubmed/"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
 }
