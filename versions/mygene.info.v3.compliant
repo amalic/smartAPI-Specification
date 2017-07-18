@@ -143,7 +143,7 @@
               "http://identifiers.org/refseq",
               "http://identifiers.org/unigene",
               "http://identifiers.org/uniprot",
-              "http://identifiers.org/pdb' x-defaultValue: CDK2 x-exampleValue: CDK2 operationId: queryGene responses: responses: "
+              "http://identifiers.org/pdb"
             ]
           }
         ],
