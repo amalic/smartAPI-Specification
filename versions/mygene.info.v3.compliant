@@ -7,7 +7,7 @@
     "termsOfService": "http://example.com/terms/",
     "contact": {
       "name": "Chunlei Wu",
-      "x-role": "responsibleDeveloper",
+      "x-role": "responsible developer",
       "email": "help@mygene.info",
       "x-id": "http://orcid.org/0000-0002-2629-6124"
     },
@@ -126,6 +126,7 @@
     "/query": {
       "get": {
         "description": "Makes gene query and returns matching gene list.",
+        "summary": "Makes gene query and returns matching gene list.",
         "x-accessRestriction": "free",
         "parameters": [
           {
@@ -142,11 +143,11 @@
               "http://identifiers.org/refseq",
               "http://identifiers.org/unigene",
               "http://identifiers.org/uniprot",
-              "http://identifiers.org/pdb"
+              "http://identifiers.org/pdb' x-defaultValue: CDK2 x-exampleValue: CDK2 operationId: queryGene responses: responses: "
             ]
           }
         ],
-        "operationId": "queryGene",
+        "operationId": "add operation id here",
         "responses": {
         "200": {
           "description": "Successful response.",
@@ -167,7 +168,7 @@
           }
         }
       }
-     }
+     }   
     },
     "/gene/{geneid}": {
       "get": {
@@ -180,20 +181,23 @@
             "in": "path",
             "description": "Entrez or Ensembl gene id, e.g., 1017, ENSG00000170248. A retired Entrez Gene id works too if it is replaced by a new one, e.g., 245794",
             "required": true,
-            "type": "string",
             "x-parameterType": "InputParameter",
             "x-valueType": [
               "http://identifiers.org/ncbigene",
               "http://identifiers.org/ensembl"
             ],
-            "x-defaultValue": null,
+            "x-defaultValue": "add default",
             "x-exampleValue": "1017"
           }
         ],
         "operationId": "getAnnotation",
+        "summary": "add summary",
         "responses": {
           "200": {
-            "schema": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+            "x-responseSchema": {
               "properties": {
                 "reporter": {
                   "properties": {
@@ -226,7 +230,7 @@
                 }
               }
             },
-            "description": "Successful response",
+            
             "x-responseValueType": [
               {
                 "path": "ec",
@@ -256,6 +260,8 @@
           }
         }
       }
-    }
+     }
+   }
   }
+ }
 }
