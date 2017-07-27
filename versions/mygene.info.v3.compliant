@@ -19,7 +19,7 @@
     "description": "Find more info here",
     "url": "https://example.com"
   },
-  "x-externalResource": [
+  "x-externalResources": [
     {
       "x-url": "http://example.org/api/docs",
       "x-type": "api documentation"
