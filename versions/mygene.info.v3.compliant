@@ -127,7 +127,7 @@
       "get": {
         "description": "Makes gene query and returns matching gene list.",
         "summary": "Makes gene query and returns matching gene list.",
-        "x-accessRestriction": "free",
+        "x-accessRestriction": "fee",
         "parameters": [
           {
             "name": "q",
