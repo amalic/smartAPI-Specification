@@ -41,8 +41,8 @@
   }],
   "tags": [
     {
-      "name": "http://purl.bioontology.org/ontology/MESH/D005796",
-      "description": "Genes"
+      "x-id": "http://purl.bioontology.org/ontology/MESH/D005796",
+      "name": "Genes"
     }
   ],
   "components": {
