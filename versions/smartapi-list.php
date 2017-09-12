@@ -80,6 +80,7 @@ foreach($list as $i => $item) {
 // markdown
 $file = "smartapi-list.md";
 $fp = fopen($file,"w");
+fwrite($fp,"smartAPI specific elements automatically generated from <a href=\"$parent_doc\">parent document</a>".PHP_EOL);
 fwrite($fp,"Object | Field | Recommendation | Datatype | Description".PHP_EOL);
 fwrite($fp,"---|:---:|:---:|:---:|---".PHP_EOL);
 foreach($mylist AS $object => $o) {
