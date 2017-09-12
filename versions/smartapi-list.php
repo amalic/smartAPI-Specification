@@ -1,25 +1,36 @@
 <?php
+# a PHP script to generate a markdown document of the smartAPI elements from the full specification document
+# creator: Michel Dumontier
 
 $file = "3.0.0.md";
 $parent_doc = 'https://github.com/SmartAPI/smartAPI-Specification/blob/OpenAPI.next/versions/3.0.0.md';
 $str = file_get_contents($file);
 
-$list = preg_split("/#### <a name=\"[^\"]+\"><\/a>/",$str, -1); // <a name="[^\"]+"></a>OpenAPI Object
+preg_match_all("/#### <a name=\"([^\"]+)\"><\/a>([^\n]+)/",$str, $header_labels);
+foreach($header_labels[2] AS $id => $label) {$header_labels[2][$id] = trim($label);}
+function getHeaderLink($label)
+{
+	global $header_labels;
+	echo $label.PHP_EOL;
+	$id = array_search($label, $header_labels[2]);
+	return $header_labels[1][$id];
+}
+$list = preg_split("/#### <a name=\"[^\"]+\"><\/a>/",$str, -1);
+
 array_shift($list);
 array_shift($list);
 array_shift($list);
 array_shift($list);
 array_shift($list);
-foreach($list as $item) {
+foreach($list as $i => $item) {
   $a = explode("\n",$item, 2);
   $object_label = trim($a[0]);
-  
+
   // now find the smartapi section
   $record = false;
   $buf = '';
   $a = explode("\n",$a[1]);
   foreach($a AS $b) {
-	// echo "line: $b".PHP_EOL;
 	
 	if($record === true) {
 		//if(strlen(trim($b)) == 0) $record = false;
@@ -73,7 +84,8 @@ fwrite($fp,"Object | Field | Recommendation | Datatype | Description".PHP_EOL);
 fwrite($fp,"---|:---:|:---:|:---:|---".PHP_EOL);
 foreach($mylist AS $object => $o) {
 	foreach($o as $field => $field_desc) {
-		fwrite($fp,$object
+		fwrite($fp,
+		'<a href="'.$parent_doc.'#'.getHeaderLink($object).'">'.$object.'</a>'
 		."|".'<a href="'.$parent_doc.'#'.$field_desc['link'].'">'.$field.'</a>'
 		."|".$field_desc['rec']
 		."|".$field_desc['datatype']
