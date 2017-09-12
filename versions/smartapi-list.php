@@ -1,6 +1,7 @@
 <?php
 
 $file = "3.0.0.md";
+$parent_doc = 'https://github.com/SmartAPI/smartAPI-Specification/blob/OpenAPI.next/versions/3.0.0.md';
 $str = file_get_contents($file);
 
 $list = preg_split("/#### <a name=\"[^\"]+\"><\/a>/",$str, -1); // <a name="[^\"]+"></a>OpenAPI Object
@@ -12,8 +13,6 @@ array_shift($list);
 foreach($list as $item) {
   $a = explode("\n",$item, 2);
   $object_label = trim($a[0]);
-
-//echo $object_label.PHP_EOL;
   
   // now find the smartapi section
   $record = false;
@@ -36,9 +35,12 @@ foreach($list as $item) {
 					preg_match("/\[\[([^\]]+)\]/",$datatype,$m);
 					if(isset($m[1])) $datatype = $m[1];
 				}
-				$desc = $cols[2];		
-				preg_match("/a>(.*)/",$cols[0],$m);
-				$field = trim($m[1]);
+				$desc = $cols[2];
+
+				// field
+				preg_match("/<a name=\"([^\"]+)\"><\/a>(.*)/",$cols[0],$m);
+				$link = trim($m[1]);
+				$field = trim($m[2]);
 				
 				// recommendation
 				preg_match('/\*\*([^\*]+)/',$desc,$m); //([^*]+)**/',$desc,$m);
@@ -52,6 +54,7 @@ foreach($list as $item) {
 				$mylist[$object_label][$field]['rec'] = $rec;		
 				$mylist[$object_label][$field]['desc'] = trim($desc);		
 				$mylist[$object_label][$field]['datatype'] = $datatype;	
+				$mylist[$object_label][$field]['link'] = $link;	
 			}
 		}
 	}
@@ -71,7 +74,7 @@ fwrite($fp,"---|:---:|:---:|:---:|---".PHP_EOL);
 foreach($mylist AS $object => $o) {
 	foreach($o as $field => $field_desc) {
 		fwrite($fp,$object
-		."|".$field
+		."|".'<a href="'.$parent_doc.'#'.$field_desc['link'].'">'.$field.'</a>'
 		."|".$field_desc['rec']
 		."|".$field_desc['datatype']
 		."|".$field_desc['desc']
