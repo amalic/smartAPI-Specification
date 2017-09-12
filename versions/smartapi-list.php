@@ -47,6 +47,8 @@ foreach($list as $item) {
 					$rec = $m[1];
 					$desc = substr($desc, strlen($rec)+5);
 				}
+				$desc = str_replace("https://github.com/WebsmartAPI/OpenAPI-Specification/blob/OpenAPI.next/versions/3.0.md#","https://github.com/SmartAPI/smartAPI-Specification/blob/OpenAPI.next/versions/3.0.0.md", $desc);
+				
 				$mylist[$object_label][$field]['rec'] = $rec;		
 				$mylist[$object_label][$field]['desc'] = trim($desc);		
 				$mylist[$object_label][$field]['datatype'] = $datatype;	
