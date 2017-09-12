@@ -1,4 +1,5 @@
 smartAPI specific elements automatically generated from <a href="https://github.com/SmartAPI/smartAPI-Specification/blob/OpenAPI.next/versions/3.0.0.md">parent document</a>
+
 Object | Field | Recommendation | Datatype | Description
 ---|:---:|:---:|:---:|---
 <a href="https://github.com/SmartAPI/smartAPI-Specification/blob/OpenAPI.next/versions/3.0.0.md#oasObject">OpenAPI Object</a>|<a href="https://github.com/SmartAPI/smartAPI-Specification/blob/OpenAPI.next/versions/3.0.0.md#oasExternalResources">x-externalResources</a>||External Resource Object|A list of external resources pertinent to the API.

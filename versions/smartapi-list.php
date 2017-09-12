@@ -11,7 +11,6 @@ foreach($header_labels[2] AS $id => $label) {$header_labels[2][$id] = trim($labe
 function getHeaderLink($label)
 {
 	global $header_labels;
-	echo $label.PHP_EOL;
 	$id = array_search($label, $header_labels[2]);
 	return $header_labels[1][$id];
 }
@@ -76,11 +75,10 @@ foreach($list as $i => $item) {
 
 }
 
-
 // markdown
 $file = "smartapi-list.md";
 $fp = fopen($file,"w");
-fwrite($fp,"smartAPI specific elements automatically generated from <a href=\"$parent_doc\">parent document</a>".PHP_EOL);
+fwrite($fp,"smartAPI specific elements automatically generated from <a href=\"$parent_doc\">parent document</a>".PHP_EOL.PHP_EOL);
 fwrite($fp,"Object | Field | Recommendation | Datatype | Description".PHP_EOL);
 fwrite($fp,"---|:---:|:---:|:---:|---".PHP_EOL);
 foreach($mylist AS $object => $o) {
