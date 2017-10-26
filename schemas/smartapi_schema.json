@@ -145,18 +145,8 @@
           "description": "The role of the contact person. Values can be: responsible organization,responsible developer,contributor,support."
         },
         "x-id": {
-          "oneOf": [
-            {
-              "type": "array",
-              "item": {
-                "type": "string"
-              }
-            },
-            {
-              "type": "string"
-            }
-          ],
-          "description": "The identifier of of the contact person (e.g. orchid Id)"
+          "type": "string",
+          "description": "An HTTP identifier for the contact (e.g. orcid id github id)"
         }
       }
     },
