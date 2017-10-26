@@ -105,14 +105,6 @@
         "x-implementationLanguage": {
           "type": "string",
           "description": "API Implementation Language"
-        },
-        "x-maturity": {
-          "type": "string",
-          "enum": [
-            "development",
-            "production"
-          ],
-          "description": "Maturity of the API. Values to use: development, production."
         }
       }
     },
@@ -214,6 +206,15 @@
         "x-location": {
           "type": "string",
           "description": "Location, city and country of the server hosting the API."
+        },
+        "x-maturity": {
+          "type": "string",
+          "enum": [
+            "development",
+			"staging",
+            "production"
+          ],
+          "description": "Maturity of the API. Values to use: development, staging, production."
         }
       }
     },
