@@ -546,12 +546,6 @@
             "format": "url"
           },
           "uniqueItems": true
-        },
-        "x-defaultValue": {
-          "type": "string"
-        },
-        "x-exampleValue": {
-          "type": "string"
         }
       },
       "patternProperties": {
