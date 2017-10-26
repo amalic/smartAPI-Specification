@@ -93,6 +93,12 @@
         "version": {
           "type": "string"
         },
+		"x-otherContacts": {
+			"type": "array",
+			"items": {
+				"$ref": "#/definitions/contact"
+			}
+        },
         "x-accessRestriction": {
           "type": "string",
           "enum": [
@@ -146,7 +152,7 @@
         },
         "x-id": {
           "type": "string",
-          "description": "An HTTP identifier for the contact (e.g. orcid id github id)"
+          "description": "A resolvable HTTP URI that uniqely identifies the contact (e.g. orcid id github id)"
         }
       }
     },
