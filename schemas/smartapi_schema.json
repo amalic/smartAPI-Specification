@@ -1,172 +1,172 @@
 {
-  "title": "The smartAPI extension to OpenAPI 3.0.",
-  "id": "http://smart-api.info/schema/smartapi-oas3.0.0.json#",
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "description": "This is the root document object of the smartAPI definition file.",
-  "properties": {
-     "x-externalResources": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/externalResource"
-      }
-	}
-  },
-  "definitions": {
-    "info": {
-      "properties": {
- 		"x-otherContacts": {
+	"title": "The smartAPI extension to OpenAPI 3.0.",
+	"id": "http://smart-api.info/schema/smartapi-oas3.0.0.json#",
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"type": "object",
+	"description": "This is the root document object of the smartAPI definition file.",
+	"properties": {
+		"x-externalResources": {
 			"type": "array",
 			"items": {
-				"$ref": "#/definitions/contact"
+				"$ref": "#/definitions/externalResource"
 			}
-        },
-        "x-accessRestriction": {
-          "type": "string",
-          "enum": [
-            "none",
-            "limited",
-            "fee"
-          ],
-          "description": "Indicate whether there are restrictions to using the API. Values to use: none, limited, fee."
-        },
-        "x-implementationLanguage": {
-          "type": "string",
-          "description": "API Implementation Language"
-        }
-      }
-    },
-    "contact": {
-      "properties": {
-        "x-role": {
-          "type": "string",
-          "enum": [
-            "responsible organization",
-            "responsible developer",
-            "contributor",
-            "support"
-          ],
-        },
-        "x-id": {
-          "type": "string",
-          "description": "A resolvable HTTP URI that uniqely identifies the contact (e.g. orcid id github id)"
-        }
-      }
-    },
-    "server": {
-      "properties": {
-        "x-location": {
-          "type": "string",
-          "description": "Location, city and country of the server hosting the API."
-        },
-        "x-maturity": {
-          "type": "string",
-          "enum": [
-            "development",
-			"staging",
-            "production"
-          ],
-        }
-      }
-    },
-    "operation": {
-      "properties": {
-        "x-accessRestriction": {
-          "type": "string",
-          "description": "Access restrictions to invoke the operation. values: none, limited, fee.",
-          "enum": [
-            "none",
-            "limited",
-            "fee"
-          ]
-        }
-      }
-    },
-    "externalResource": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "information about external documentation",
-      "required": [
-	    "x-description",
-        "x-url",
-        "x-type"
-      ],
-      "properties": {
-        "x-description": {
-          "type": "string",
-          "description": "A short description of the target documentation. CommonMark syntax can be used for rich text representation."
-        },
-        "x-url": {
-          "type": "string",
-          "format": "url"
-        },
-        "x-type": {
-          "type": "string",
-          "enum": [
-            "api documentation",
-            "website",
-            "developer forum",
-            "mailing list",
-            "social media",
-            "publication"
-          ]
-        }
-      },
-      "patternProperties": {
-        "^x-": {
-          "$ref": "#/definitions/specificationExtension"
-        }
-      }
-    },
-    "parameter": {
-      "properties": {
-        "x-parameterType": {
-          "type": "string",
-          "description": "Type of parameter, e.g. InputParameter, NumberOfResultsReturned, OffsetParameter, SortParameter."
-        },
-        "x-valueType": {
-          "type": "array",
-          "description": "a list of semantic identifiers of the parameter from identifiers.org, e.g. [http://identifiers.org/ncbigene/]",
-          "items": {
-            "type": "string",
-            "format": "url"
-          },
-          "uniqueItems": true
-        }
-      },
-    },
-    "mediaType": {
-      "properties": {
-		"x-responseValueType" {
-		  "$ref": "#/definitions/responseValueType"
 		}
-      }
-    },
-	"responseValueType": {
-	  "properties": {
-	    "x-path": {
-		   "type": "string",
-		   "description": "The path, using dot notation, to the element of interest"
-		},
-		"x-valueType": {
-		    "type": "string",
-			"description": "The value type as specified by a concept URI for the element of interest"
-		}
-	  }
 	},
-    "tag": {
-        "x-id": {
-          "type": "string",
-          "description": "The name of the tag. Recommend that you use URI to specify the concept."
-        }
-      }
-    },
-    "schema": {
-      "properties": {
-        "x-url": {
-          "type": "string",
-		  "description": "The URL to a non-JSON schema."
-        }
-      }
-    }
+	"definitions": {
+		"info": {
+			"properties": {
+				"x-otherContacts": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/contact"
+					}
+				},
+				"x-accessRestriction": {
+					"type": "string",
+					"enum": [
+						"none",
+						"limited",
+						"fee"
+					],
+					"description": "Indicate whether there are restrictions to using the API. Values to use: none, limited, fee."
+				},
+				"x-implementationLanguage": {
+					"type": "string",
+					"description": "API Implementation Language"
+				}
+			}
+		},
+		"contact": {
+			"properties": {
+				"x-role": {
+					"type": "string",
+					"enum": [
+						"responsible organization",
+						"responsible developer",
+						"contributor",
+						"support"
+					]
+				},
+				"x-id": {
+					"type": "string",
+					"description": "A resolvable HTTP URI that uniqely identifies the contact (e.g. orcid id github id)"
+				}
+			}
+		},
+		"server": {
+			"properties": {
+				"x-location": {
+					"type": "string",
+					"description": "Location, city and country of the server hosting the API."
+				},
+				"x-maturity": {
+					"type": "string",
+					"enum": [
+						"development",
+						"staging",
+						"production"
+					]
+				}
+			}
+		},
+		"operation": {
+			"properties": {
+				"x-accessRestriction": {
+					"type": "string",
+					"description": "Access restrictions to invoke the operation. values: none, limited, fee.",
+					"enum": [
+						"none",
+						"limited",
+						"fee"
+					]
+				}
+			}
+		},
+		"externalResource": {
+			"type": "object",
+			"additionalProperties": false,
+			"description": "information about external documentation",
+			"required": [
+				"x-description",
+				"x-url",
+				"x-type"
+			],
+			"properties": {
+				"x-description": {
+					"type": "string",
+					"description": "A short description of the target documentation. CommonMark syntax can be used for rich text representation."
+				},
+				"x-url": {
+					"type": "string",
+					"format": "url"
+				},
+				"x-type": {
+					"type": "string",
+					"enum": [
+						"api documentation",
+						"website",
+						"developer forum",
+						"mailing list",
+						"social media",
+						"publication"
+					]
+				}
+			},
+			"patternProperties": {
+				"^x-": {
+					"$ref": "#/definitions/specificationExtension"
+				}
+			}
+		},
+		"parameter": {
+			"properties": {
+				"x-parameterType": {
+					"type": "string",
+					"description": "Type of parameter, e.g. InputParameter, NumberOfResultsReturned, OffsetParameter, SortParameter."
+				},
+				"x-valueType": {
+					"type": "array",
+					"description": "a list of semantic identifiers of the parameter from identifiers.org, e.g. [http://identifiers.org/ncbigene/]",
+					"items": {
+						"type": "string",
+						"format": "url"
+					},
+					"uniqueItems": true
+				}
+			}
+		},
+		"mediaType": {
+			"properties": {
+				"x-responseValueType": {
+					"$ref": "#/definitions/responseValueType"
+				}
+			}
+		},
+		"responseValueType": {
+			"properties": {
+				"x-path": {
+					"type": "string",
+					"description": "The path, using dot notation, to the element of interest"
+				},
+				"x-valueType": {
+					"type": "string",
+					"description": "The value type as specified by a concept URI for the element of interest"
+				}
+			}
+		},
+		"tag": {
+			"x-id": {
+				"type": "string",
+				"description": "The name of the tag. Recommend that you use URI to specify the concept."
+			}
+		}
+	},
+	"schema": {
+		"properties": {
+			"x-url": {
+				"type": "string",
+				"description": "The URL to a non-JSON schema."
+			}
+		}
+	}
 }
