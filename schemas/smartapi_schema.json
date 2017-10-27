@@ -1,6 +1,6 @@
 {
 	"title": "The smartAPI extension to OpenAPI 3.0.",
-	"id": "http://smart-api.info/schema/smartapi-oas3.0.0.json#",
+	"id": "https://raw.githubusercontent.com/SmartAPI/smartAPI-Specification/OpenAPI.next/schemas/smartapi_schema.json#",
 	"$schema": "http://json-schema.org/draft-06/schema#",
 	"type": "object",
 	"description": "This is the root document object of the smartAPI definition file.",
@@ -159,6 +159,28 @@
 				"type": "string",
 				"description": "The name of the tag. Recommend that you use URI to specify the concept."
 			}
+		},
+		"specificationExtension": {
+			"description": "Any property starting with x- is valid.",
+			"oneOf": [{
+					"type": "null"
+				},
+				{
+					"type": "number"
+				},
+				{
+					"type": "boolean"
+				},
+				{
+					"type": "string"
+				},
+				{
+					"type": "object"
+				},
+				{
+					"type": "array"
+				}
+			]
 		}
 	},
 	"schema": {
