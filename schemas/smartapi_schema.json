@@ -5,14 +5,26 @@
   "type": "object",
   "description": "This is the root document object of the smartAPI definition file.",
   "properties": {
+    "info": {
+      "$ref": "#/definitions/info"
+    },
+    "servers": {
+      "type": "array",
+      "items": {
+         "$ref": "#/definitions/server"
+      }
+    },
     "x-externalResources": {
       "type": "array",
       "items": {
         "$ref": "#/definitions/externalResource"
       }
     },
-    "info": {
-      "$ref": "#/definitions/info"
+    "tags": {
+      "type": "array",
+      "items": {
+         "$ref": "#/definitions/tag"
+      }
     },
     "paths": {
       "type": "object",
@@ -75,6 +87,9 @@
       }
     },
     "info": {
+      "required": [
+          "termsOfService"
+      ],
       "properties": {
         "x-otherContacts": {
           "type": "array",
@@ -97,6 +112,10 @@
         },
         "contact": {
           "$ref": "#/definitions/contact"
+        },
+        "termsOfService": {
+           "type": "string",
+           "format": "url"
         }
       }
     },
@@ -133,23 +152,6 @@
         }
       }
     },
-    "Parameter": {
-      "properties": {
-        "x-valueType": {
-          "type": "array",
-          "description": "a list of semantic identifiers of the parameter from identifiers.org, e.g. [http://identifiers.org/ncbigene/]",
-          "items": {
-            "type": "string",
-            "format": "url"
-          },
-          "uniqueItems": true
-        },
-        "x-parameterType": {
-          "type": "string",
-          "description": "Type of parameter, e.g. InputParameter, NumberOfResultsReturned, OffsetParameter, SortParameter."
-        }
-      }
-    },
     "externalResource": {
       "type": "object",
       "additionalProperties": false,
@@ -178,6 +180,23 @@
             "social media",
             "publication"
           ]
+        }
+      }
+    },
+    "Parameter": {
+      "properties": {
+        "x-valueType": {
+          "type": "array",
+          "description": "a list of semantic identifiers of the parameter from identifiers.org, e.g. [http://identifiers.org/ncbigene/]",
+          "items": {
+            "type": "string",
+            "format": "url"
+          },
+          "uniqueItems": true
+        },
+        "x-parameterType": {
+          "type": "string",
+          "description": "Type of parameter, e.g. InputParameter, NumberOfResultsReturned, OffsetParameter, SortParameter."
         }
       }
     },
