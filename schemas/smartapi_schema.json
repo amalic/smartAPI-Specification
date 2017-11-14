@@ -1,7 +1,6 @@
 {
   "title": "The smartAPI extension to OpenAPI 3.0.",
-  "$schema": "http://json-schema.org/draft-06/schema#",
-  "$id": "",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "description": "This is the root document object of the smartAPI definition file.",
   "properties": {
@@ -11,7 +10,7 @@
     "servers": {
       "type": "array",
       "items": {
-         "$ref": "#/definitions/server"
+        "$ref": "#/definitions/server"
       }
     },
     "x-externalResources": {
@@ -23,7 +22,7 @@
     "tags": {
       "type": "array",
       "items": {
-         "$ref": "#/definitions/tag"
+        "$ref": "#/definitions/tag"
       }
     },
     "paths": {
@@ -88,7 +87,7 @@
     },
     "info": {
       "required": [
-          "termsOfService"
+        "termsOfService"
       ],
       "properties": {
         "x-otherContacts": {
@@ -114,8 +113,8 @@
           "$ref": "#/definitions/contact"
         },
         "termsOfService": {
-           "type": "string",
-           "format": "url"
+          "type": "string",
+          "format": "uri"
         }
       }
     },
@@ -168,7 +167,7 @@
         },
         "x-url": {
           "type": "string",
-          "format": "url"
+          "format": "uri"
         },
         "x-type": {
           "type": "string",
@@ -190,7 +189,7 @@
           "description": "a list of semantic identifiers of the parameter from identifiers.org, e.g. [http://identifiers.org/ncbigene/]",
           "items": {
             "type": "string",
-            "format": "url"
+            "format": "uri"
           },
           "uniqueItems": true
         },
@@ -217,9 +216,11 @@
       }
     },
     "tag": {
-      "x-id": {
-        "type": "string",
-        "description": "The name of the tag. Recommend that you use URI to specify the concept."
+      "properties": {
+        "x-id": {
+          "type": "string",
+          "description": "The name of the tag. Recommend that you use URI to specify the concept."
+        }
       }
     },
     "schema": {
