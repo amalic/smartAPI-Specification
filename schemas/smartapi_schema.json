@@ -33,7 +33,13 @@
           "patternProperties": {
             ".": {
               "type": "object",
+              "required": [
+                "summary"
+              ],
               "properties": {
+                "summary": {
+                  "type": "string"
+                },
                 "parameters": {
                   "type": "array",
                   "items": {
@@ -131,6 +137,7 @@
         },
         "x-id": {
           "type": "string",
+          "format": "uri",
           "description": "A resolvable HTTP URI that uniqely identifies the contact (e.g. orcid id github id)"
         }
       }
@@ -156,7 +163,6 @@
       "additionalProperties": false,
       "description": "information about external documentation",
       "required": [
-        "x-description",
         "x-url",
         "x-type"
       ],
