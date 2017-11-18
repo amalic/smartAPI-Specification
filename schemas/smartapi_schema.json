@@ -31,7 +31,7 @@
         "^\\/": {
           "type": "object",
           "patternProperties": {
-            ".": {
+            "get|put|post|delete|options|head|patch|trace": {
               "type": "object",
               "required": [
                 "summary"
